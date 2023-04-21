@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique E-commerce</title>
+
+    <!-- Lien pour le changement de de font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+     <!-- Lien bootstrap -->
+    <link rel="stylesheet" href="client/utilitaires/bootstrap-5.2.3-dist/css/bootstrap.min.css">
+
+    <!-- Lien du style css -->
+    <link rel="stylesheet" href="client/ressources/css/style.css">
+    <link rel="stylesheet" href="client/ressources/css/style2.css">
+
+    <!-- Scritp Jquery/Bootstrap -->
+    <script src="client/utilitaires/jquery-3.6.3.min.js"></script>
+    <script src="client/utilitaires/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script du global/requete/vues.js -->
+    <script src="client/ressources/js/global.js"></script>
+    <script src="client/connexion/requetes.js"></script>
+    <script src="client/membre/requetes.js"></script>
+    <script src="client/article/requetes.js"></script>
+    <script src="client/article/vues.js"></script>
+
+</head>
+<body>
+<div class="container-fluid bg-black">
+    <!-- Menu de navigation -->
+    <nav class="navbar navbar-expand-lg bg-black ">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="#">
+                    <img class="logo" src="client/ressources/images/Chanel.jpg" alt="logo" width="120" height="55">
+                </a>
+            </div>
+                <button class="navbar-toggler text-black"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon ">
+                        <svg class="bi " width="20" height="20" fill="currentColor"> 
+                        </svg>
+                    </span>
+                </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Liste des catégories
+                        </a>
+                <ul class="dropdown-menu ">
+                    <li><a class="dropdown-item" href="#">Bracelet</a></li>
+                    <li><a class="dropdown-item" href="#">Bague</a></li>
+                    <li><a class="dropdown-item" href="#">Boucle d'oreille</a></li>
+                    <li><a class="dropdown-item" href="#">Collier</a></li>
+                </ul>
+                </li>
+                </ul>
+
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="" class="nav-item nav-link text-white" data-bs-toggle="modal" data-bs-target="#modalEnreg">Devenir membre</a>
+                    <a href="" class="nav-item nav-link text-white" data-bs-toggle="modal" data-bs-target="#modalConnexion">Se connecter</a>
+                    <a href="#">
+                        <svg class="bi m-2 text-dark" width="20" height="20" fill="currentColor"> 
+                            <use xlink:href="client/utilitaires/bootstrap-icons.svg#cart4"/> 
+                        </svg>
+                    </a>     
+                </div>
+                <p id="msg3"></p>
+            </div>       
+        </div>
+    </nav>
+    <!-- Fin de menu de navigation -->
+
+    <!-- Modal Enregistrer -->
+    <div class="modal fade" id="modalEnreg" tabindex="-1" aria-labelledby="ModalEnregLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEnregLabel">Nouveau membre</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" id="formEnreg">
+                        <div class="col-md-4">
+                            <label for="prenom" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom" value="" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="courriel" class="form-label">Courriel</label>
+                            <input type="email" class="form-control" id="courriel" name="courriel" value="" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pass" class="form-label">Mot Passe</label>
+                            <input type="password" class="form-control" id="pass" name="pass" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cpass" class="form-label">Confirmer mot passe</label>
+                            <input type="password" class="form-control" id="cpass" name="cpass" required>
+                        </div>
+                        <span class="msgFormEnreg">Pour des raison statistiques</span>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" id="feminin" value="F" name="sexe">
+                            <label class="form-check-label" for="feminin">Féminin</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" id="masculin" value="M" name="sexe">
+                            <label class="form-check-label" for="masculin">Masculin</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" id="autre" value="A" name="sexe">
+                            <label class="form-check-label" for="autre">Autre</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="date" class="form-label">Date de naissance</label>
+                            <input type="date" class="form-control" id="datenaissance" name="datenaissance">
+                        </div>
+                        <div class="col-12  d-flex justify-content-between">
+                            <button class="btn btn-primary" type="button" onClick="enregistrer();">Enregister</button>
+                            <button type="reset" class="btn btn-secondary ms-auto" data-bs-dismiss="modal">Fermer</button>
+                        </div>
+                        <div><p id="msgE"></p></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin du Modal Enregistrer -->
+
+    <!-- Modal Connexion -->
+    <div class="modal fade" id="modalConnexion" tabindex="-1" aria-labelledby="ModalConnexionLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalConnexionLabel">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" id="formConnexion">
+                        <div class="col-md-4">
+                            <label for="courriel" class="form-label">Courriel</label>
+                            <input type="email" class="form-control" id="courrielc" name="courrielc" value="" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pass" class="form-label">Mot Passe</label>
+                            <input type="password" class="form-control" id="passc" name="passc" required>
+                        </div>
+                        <div class="col-12 ">
+                            <button class="btn btn-primary" type="button" onClick="connexion()">Connexion</button>
+                        </div>
+                        <p id="msg2"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Fin du Modal Connexion -->
+    
+    <!-- Début du Toast -->
+    <div id="dragindex" class="toast-container posToast">
+        <div id="toast" class="toast  align-items-center text-white bg-danger border-0" data-bs-autohide="false"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="client/ressources/images/message.png" width=24 height=24 class="rounded me-2" alt="message">
+                <strong class="me-auto">Messages</strong>
+                <small class="text-muted"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="textToast" class="toast-body">
+                <!-- texte du Toast -->
+            </div>
+        </div>
+    </div>
+    <!-- Fin du Toast -->
+
+    <!-- Carousel Start -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" style="height: 410px;">
+            <img src="client/ressources/images/m1.jpg" class="d-block w-100" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3" style="max-width: 700px;">
+                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Le luxe accrocher à vous!</h4>
+                    <h5 class="display-4 text-white font-weight-semi-bold mb-4">Bracelet d'exeption</h5>
+                    
+                </div>
+            </div>
+          </div>
+          <div class="carousel-item" style="height: 410px;">
+            <img src="client/ressources/images/m2.jpg" class="d-block w-100" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3" style="max-width: 700px;">
+                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Une aliance pour la vie!</h4>
+                    <h5 class="display-4 text-white font-weight-semi-bold mb-4">Ring d'engagement</h5>
+                    
+                </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="height: 410px;">
+            <img src="client/ressources/images/m3.jpg" class="d-block w-100" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3" style="max-width: 700px;">
+                    <h4 class="text-light text-uppercase font-weight-medium mb-3"> Un visage inoubliable!</h4>
+                    <h5 class="display-4 text-white font-weight-semi-bold mb-4">Earring étincellante</h5>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    <!-- Carousel End -->
+
+     <!-- section-2 new-arrivals-->
+  <section id="new-arrivals">
+    <div class="new-arrivals wrapper">
+     <div class="container">
+       <div class="row">
+        <div class="col-12 mb-2 text-content text-center">
+            <h2 data-scroll-direction="horizontal" data-scroll data-scroll-speed="1" >NEW ARRIVALS</h2>
+            <p data-scroll-direction="horizontal" data-scroll data-scroll-speed="2" >This unique jewelry is handcrafted on the beautiful island of Nantucket using fine silver and semi precious stones. View glasse fashion collection 2018 by Fanbong</p>
+        </div>
+       </div>
+       <div class="row align-items-center">
+         <div class="col-sm-4 col-12 p-sm-0 card-banner">
+           <div class="card-banner position-relative text-center">
+             <a href="#" class="card-thumb">
+               <img src="./client/ressources/images/img/bracelet/bracelet 1.jpg" alt="img-1" class="img-fluid">
+             </a>
+             <div class="banner-info text-center">
+                <h2>BRACELETS</h2>
+                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod</p>
+                <a href="#" class="main-btn">Shop now</a>
+              </div>
+           </div>
+         </div>
+         <div class="col-sm-4 col-12 p-sm-0 card-banner">
+          <div class="card-banner position-relative text-center">
+            <a href="#" class="card-thumb">
+              <img src="./client/ressources/images/img/ring/Coco Crush Ring gold small.jpg" alt="img-1" class="img-fluid">
+            </a>
+            <div class="banner-info text-center">
+              <h2>RINGS</h2>
+              <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod</p>
+              <a href="#" class="main-btn">Shop now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-12 p-sm-0 card-banner">
+          <div class="card-banner position-relative text-center">
+            <a href="#" class="card-thumb">
+              <img src="./client/ressources/images/img/earring/earring star.jpg" alt="img-1" class="img-fluid">
+            </a>
+            <div class="banner-info text-center">
+              <h2>EARRINGS</h2>
+              <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod</p>
+              <a href="#" class="main-btn">Shop now</a>
+            </div>
+          </div>
+        </div>
+       </div>
+     </div> 
+    </div>
+  </section>
+<!-- section-2 products End -->
+
+<!-- section-3 products-->
+<section data-scroll-section id="products" class="products">
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-content text-center">
+            <h2 data-scroll-direction="horizontal" data-scroll data-scroll-speed="1">BEST SELLERS</h2>
+            <p data-scroll-direction="horizontal" data-scroll data-scroll-speed="2">At risus viverra adipiscing at. Iaculis urna id volutpat lacus laoreet non curabitur. Enim lobortis
+              scelerisque women dui faucibus in. Nisl suscipit adipiscing.</p>
+          </div>
+          <div class="col-12">
+            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="jwellery-tab" data-bs-toggle="tab" data-bs-target="#jwellery"
+                  type="button" role="tab" aria-controls="jwellery" aria-selected="true">Bracelets</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ring-tab" data-bs-toggle="tab" data-bs-target="#ring" type="button"
+                  role="tab" aria-controls="ring" aria-selected="false">Rings</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="earings-tab" data-bs-toggle="tab" data-bs-target="#earings" type="button"
+                  role="tab" aria-controls="earings" aria-selected="false">Earrings</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="jwellery" role="tabpanel" aria-labelledby="jwellery-tab">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/bracelet/bracelet 2.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">comete chevron bracelet</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$19,200</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/bracelet/ruban bracelet.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">Ruban Bracelet</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$26,050</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/bracelet/bracelet 3.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">coco crush bracelet</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$9900</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/bracelet/bracelet 4.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">lune ring</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$6350</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="ring" role="tabpanel" aria-labelledby="ring-tab">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/ring/lune ring.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">Lune ring</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$17,100</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/ring/eternal ring argent.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">Eternal n5 ring</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$11,100</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/ring/Coco Crush Ring gold.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">coco crush ring</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$3500</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/ring/Bouton camelia.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">bouton de camélia ring</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$17,100</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="earings" role="tabpanel" aria-labelledby="earings-tab">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/earring/earring camelia.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">extrait de camélia earrings</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$7400</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/earring/earring n5.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">eternal n5 transformable earrings</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$13,950</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/earring/earring filante.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">étoile filante earrings</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$11,450</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="item-product">
+                      <a href="#" class="product-thumb-link">
+                        <img src="./client/ressources/images/img/earring/earring camélia.jpg" class="img-fluid">
+                      </a>
+                    </div>
+                    <div class="product-info">
+                      <div class="d-flex justify-content-between py-3">
+                        <a href="#" class="cat-parent">Women</a>
+                        <a href="#" class="wishlist">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                      </div>
+                      <h4 class="product-title">
+                        <a href="#">camélia précieux earrings</a>
+                      </h4>
+                      <div class="product-price">
+                        <ins><span class="money text-white">$26200</span></ins>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between py-1">
+                        <div class="rating">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                        <div class="basket">
+                          <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- section-3 products End -->
+
+<!-- section-4 products -->
+<section data-scroll-section id="deal">
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center border border-white deal-of-the-day py-5">
+              <div class="text-content py-5">
+                <h2 data-scroll data-scroll-speed="1">DEALS OF THE DAY</h2>
+                <h4 data-scroll data-scroll-speed="2">UPTO 60% OFF</h4>
+                <p data-scroll data-scroll-speed="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus a odio finibus bibendum in sit
+                  amet leo. Mauris feugiat erat tellus</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- section-4 products End -->
+
+<!-- section-5 products -->
+<section data-scroll-section id="blog">
+    <div class="blog-section wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-2 text-content text-center">
+            <h2 data-scroll-direction="horizontal" data-scroll data-scroll-speed="1">LATEST NEWS FROM THE BLOG</h2>
+            <p data-scroll-direction="horizontal" data-scroll data-scroll-speed="1">This unique jewelry is handcrafted on the beautiful island of Nantucket using fine silver and semi precious stones. View glasse fashion collection 2018 by Fanbong</p>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-4 col-sm-6 mb-4 mb-lg-0">
+            <div>
+              <a href="#" class="card-thumb">
+                <img data-scroll data-scroll-speed="1" src="./client/ressources/images/img/rome1.jpg" alt="" class="img-fluid">
+              </a>
+              <div class="text-center px-2 mt-2">
+                <h2 data-scroll data-scroll-speed="1">Girls Wear Tops</h2>
+                <p data-scroll data-scroll-speed="2">Our urban and streetwear fashion place is no Old Navy, Banana Republic or a Walmart clothing store, God forbid. We've quickly become...</p>
+                <a href="#" class="main-btn">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4 mb-lg-0">
+            <div>
+              <a href="#" class="card-thumb">
+                <img data-scroll data-scroll-speed="3" src="./client/ressources/images/img/rome3.jpg" alt="" class="img-fluid">
+              </a>
+              <div class="text-center px-2 mt-2">
+                <h2 data-scroll data-scroll-speed="1">Girl A Necklace</h2>
+                <p data-scroll data-scroll-speed="2">Our urban and streetwear fashion place is no Old Navy, Banana Republic or a Walmart clothing store, God forbid. We've quickly become...</p>
+                <a href="#" class="main-btn">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4 mb-lg-0">
+            <div>
+              <a href="#" class="card-thumb">
+                <img data-scroll data-scroll-speed="1" src="./client/ressources/images/img/rome2.jpg" alt="" class="img-fluid">
+              </a>
+              <div class="text-center px-2 mt-2">
+                <h2 data-scroll data-scroll-speed="1">Girls Wear Rings</h2>
+                <p data-scroll data-scroll-speed="2">Our urban and streetwear fashion place is no Old Navy, Banana Republic or a Walmart clothing store, God forbid. We've quickly become...</p>
+                <a href="#" class="main-btn mt-2">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- section-5 products End -->
+
+<div class="cursor"></div>
+
+<!-- Footer -->
+
+<footer data-scroll-section>
+    <div class="footer py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-start text-center text-lg-start"> 
+            <div class="footer-logo text-muted mb-3 mb-md-0"> 
+              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This page is made with by <a href="" target="_blank">Williams and Hicham</a>
+            </div>
+          </div>
+          <div class="col-md-6 text-center text-lg-end">
+            <div class="footer-social pt-1">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </footer>
+
+
+<!-- JS Libraries --> 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+<script>
+    const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true
+    });
+</script>
+<script>
+  const cursor = document.querySelector(".cursor");
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.pageX + "px";
+    cursor.style.top = e.pageY + "px";
+  });
+</script>
+
+</body>
+</html>

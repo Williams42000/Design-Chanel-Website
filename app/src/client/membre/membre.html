@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membre</title>
+    <link rel="stylesheet" href="../utilitaires/bootstrap-5.2.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../utilitaires/icons-1.8.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="../ressources/css/style.css">
+
+    <!-- <link rel="stylesheet" href="panier.css"> -->
+    <script src="../utilitaires/jquery-3.6.3.min.js"></script>
+    <script src="../utilitaires/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.twbsPagination.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="../ressources/js/global.js"></script>
+    <script src="../article/requetes.js"></script>
+    <script src="../article/vues.js"></script>
+    <script src="panier.js"></script>
+</head>
+<body onLoad="afficherNombreArticlesPanier(); lister('membre');">
+    <!-- Menu de navigation -->
+    <nav class="navbar navbar-expand-lg bg-black ">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="#">
+                    <img class="logo" src="../ressources/images/Chanel.jpg" alt="logo" width="120" height="55">
+                </a>
+            </div>
+                <button class="navbar-toggler text-black"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon ">
+                        <svg class="bi " width="20" height="20" fill="currentColor"> 
+                        </svg>
+                    </span>
+                </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Profil</a>
+                    </li>                 
+                </ul>
+
+                <div class="navbar-nav ml-auto py-0">
+                    <a id="pa" href="javascript:afficherPanier();">
+                        <svg class="bi m-2 text-white" width="20" height="20" fill="currentColor"> 
+                            <use xlink:href="../utilitaires/bootstrap-icons.svg#cart4"/> 
+                        </svg>
+                    </a>
+                    <span class="text-white" id="nbart">(0)</span>
+                    
+                    <a id="bdc" href="../../index.html" class="nav-item nav-link text-white" >Quitter</a>
+                </div>
+            </div>       
+        </div>
+    </nav>
+    <!-- Fin du Menu de navigation -->
+
+    <br><br><br>
+    <div class="container" id="contenu"></div>
+    
+    <!-- Début Modal du panier -->
+    <div class="modal fade" id="idModPanier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="contenuPanier"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal du panier -->
+</body>
+</html>

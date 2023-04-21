@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../utilitaires/bootstrap-5.2.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../utilitaires/icons-1.8.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="../ressources/css/style.css">
+    <link rel="stylesheet" href="client/ressources/css/style.css">
+    <!-- <link rel="stylesheet" href="admin.css"> -->
+    <script src="../utilitaires/jquery-3.6.3.min.js"></script>
+    <script src="../utilitaires/jquery-ui.js"></script>
+    <script src="../utilitaires/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../utilitaires/jquery.twbsPagination.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="../ressources/js/global.js"></script>
+    <script src="../article/requetes.js"></script>
+    <script src="../membre/requetes.js"></script>
+    <script src="../article/vues.js"></script>
+</head>
+<body onLoad="lister('admin');">
+        <!-- Menu de navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+            <div class="container-fluid">
+                <div class="logo">
+                    <a href="#">
+                        <img class="logo" src="../ressources/images/Chanel.jpg" alt="logo" width="120" height="55">
+                    </a>
+                </div>
+                <button class="navbar-toggler text-black"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon ">
+                        <svg class="bi " width="20" height="20" fill="currentColor"> 
+                        </svg>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="../../index.html" class="nav-item nav-link text-white">Quitter</a>
+                    </div>
+                </div>       
+            </div>
+        </nav>
+        <!-- Fin du Menu de navigation -->
+
+        <div>
+            <br><br>
+        </div>
+
+        <!-- Debut tableau d'articles -->  
+       
+<div id="contenu"></div>
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h2>Articles</h2>
+                    </div>
+                    <div class="col-sm-7">
+                        <nav class="navbar">
+                            <ul>
+                                <li class="nav-item">
+                                    <form class="form-inline" role="form">
+                                        <div class="form-group">
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class=" col-sm-3">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#modalAjouter"><i class="bi bi-plus-circle"></i>
+                            <span>Ajouter</span></button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Nom de l'article</th>
+                        <th>Description</th>
+                        <th>Prix</th>
+                        <th>Catégorie</th>
+                        <th>Seuil</th>
+                        <th>Quantité en inventaire</th>
+                    </tr>
+                </thead>
+                <tbody id="emp_body"></tbody>
+                <tr>
+                    <th colspan="11">
+                        <div id="pager">
+                            <ul id="pagination" class="pagination-sm">
+                            </ul>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+        <!-- Fin tableau d'articles -->
+
+
+          <!-- Corps du tableau Membres  
+        <div id="contenuM"></div>
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h2>Membres</h2>
+                    </div>
+                    <div class="col-sm-7">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Prénom</th>
+                        <th>Nom </th>
+                        <th>Courriel</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody id="emp_bodyM"></tbody>
+                <tr>
+                    <th colspan="11">
+                        <div id="pagerM">
+                            <ul id="paginationM" class="pagination-sm">
+                            </ul>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+ Fin Corps du tableau Membres --> 
+
+
+
+               
+
+    <!-- Début Modal pour ajouter un article  -->
+    <div class="modal fade" id="modalAjouter" tabindex="-1" aria-labelledby="ModalEnregLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEnregLabel">Ajouter un article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" id="formAjouter" enctype="multipart/form-data">
+                        <div class="col-md-6">
+                            <label for="nomarticle" class="form-label">Non de l'article</label>
+                            <input type="text" class="form-control" id="nomarticle" name="nomarticle" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="number" class="form-control" id="prix" name="prix" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                          </div>
+                          
+                        <div class="col-md-12">
+                            <label for="categorie" class="form-label">Catégorie</label>
+                            <select class="form-control" id="categorie" name="categorie" required>
+                                <option value="">-- Sélectionnez une catégorie --</option>
+                                <option value="Bracelets">Bracelet</option>
+                                <option value="Rings">Bague</option>
+                                <option value="Earrings">Boucle d'oreille</option>
+                                <option value="Earrings">Collier</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="seuil" class="form-label">Seuil</label>
+                            <input type="number" class="form-control" id="seuil" name="seuil" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="qteinventaire" class="form-label">Quantité en Inventaire</label>
+                            <input type="number" class="form-control" id="qteinventaire" name="qteinventaire" required>
+                        </div>
+                          
+                        <div class="col-md-12">
+                            <label for="pochette" class="form-label">Choisir l'image</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="pochette" name="pochette[]">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" onClick="ajouter();">Ajouter</button>
+                            <p id="msg3"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal pour ajouter un article -->
+
+
+    <!-- Début Modal pour modifier un article -->
+    <div class="modal fade" id="modalModifier" tabindex="-1" aria-labelledby="ModalModifierLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalModifierLabel">Modifier un article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" id="formModifier" enctype="multipart/form-data">
+                        <div class="col-md-6">
+                            <label for="nomarticleM" class="form-label">Non de l'article</label>
+                            <input type="text" class="form-control" id="nomarticleM" name="nomarticle" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prixM" class="form-label">Prix</label>
+                            <input type="number" class="form-control" id="prixM" name="prix" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="descriptionM" class="form-label">Description</label>
+                            <textarea class="form-control" id="descriptionM" name="description" required></textarea>
+                          </div>
+                          
+                        <div class="col-md-12">
+                            <label for="categorieM" class="form-label">Catégorie</label>
+                            <select class="form-control" id="categorieM" name="categorie" required>
+                                <option value="">-- Sélectionnez une catégorie --</option>
+                                <option value="Bracelets">Bracelet</option>
+                                <option value="Rings">Bague</option>
+                                <option value="Earrings">Boucle d'oreille</option>
+                                <option value="Earrings">Collier</option>
+                              </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="seuilM" class="form-label">Seuil</label>
+                            <input type="number" class="form-control" id="seuilM" name="seuil" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="qteinventaireM" class="form-label">Quantité en Inventaire</label>
+                            <input type="number" class="form-control" id="qteinventaireM" name="qteinventaire" required>
+                        </div>
+                          
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="pochetteM" name="pochette[]">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" onClick="modifier();">Modifier l'article</button>
+                            <p id="msg4"></p>
+                        </div>
+                        <input type="hidden" id="idf" name="idf">
+                        <input type="hidden" id="anciennePochette" name="anciennePochette">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal pour modifier un article -->
+
+<!-- Début Modal pour supprimer un article -->
+<div class="modal fade" id="supprimerArticleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Cela va effacer votre article ?</p>
+                <p class="text-warning"><small>Cette action est irreversible...</small></p>
+                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Annuler">
+                <input type="button" onClick="requetteSupprimerArticle();" class="btn btn-danger" value="Supprimer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin Modal pour supprimer un article -->
+
+
+<!-- Début du Toast -->
+<div id="dragadm" class="toast-container posToast">
+    <div id="toast" class="toast  align-items-center text-white bg-danger border-0" data-bs-autohide="false"
+        role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="../ressources/images/message.png" width="24" height="24" class="rounded me-2" alt="message">
+            <strong class="me-auto">Messages</strong>
+            <small class="text-muted"></small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div id="textToast" class="toast-body">
+<!-- texte du Toast -->
+        </div>
+    </div>
+</div>
+<!-- Fin du Toast -->
+
+</body>
+</html>
